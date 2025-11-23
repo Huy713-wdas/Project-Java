@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8" />
+    <title>Đăng ký - Carbon Credit Marketplace</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <style>
+        body{font-family:Segoe UI,Roboto,Arial;margin:0;padding:20px;
+            background:url('https://tapchinganhang.gov.vn/stores/news_dataimages/2025/062025/30/17/carbon-credit-589920250630172437.jpg?rt=20250630172438://vietnamblockchain.asia/wp-content/uploads/2024/02/CC_1@4x-768x342.png') no-repeat center center;
+background-size:cover;
+
+            min-height:100vh;display:flex;align-items:center;justify-content:center}
+        .card{width:460px;background:#fff;border-radius:10px;padding:20px 24px;
+            box-shadow:0 12px 30px rgba(0,0,0,0.12)}
+        .tabs{display:flex;gap:8px;background:#f1f4f8;padding:6px;border-radius:20px;margin-bottom:18px}
+        .tabs button{flex:1;padding:8px 12px;border-radius:16px;border:none;background:transparent;cursor:pointer;color:#333}
+        .tabs button.active{background:#fff;box-shadow:0 2px 6px rgba(0,0,0,0.06)}
+        h2{margin:6px 0 14px 0;font-weight:600}
+        label{display:block;font-size:14px;margin-top:10px;color:#333}
+        input[type=email],input[type=password],input[type=text]{width:100%;padding:10px;border:1px solid #e6eef3;border-radius:8px;margin-top:6px;font-size:14px}
+        .submit{margin-top:18px;width:100%;padding:12px;background:linear-gradient(90deg,#06b26e,#059e63);color:#fff;border:none;border-radius:8px;cursor:pointer;font-weight:600;font-size:14px}
+        .submit:hover{opacity:0.95}
+        .muted{color:#6b7280;font-size:13px;text-align:center;margin-top:12px}
+        a.sign{color:#0b8f57;font-weight:600;text-decoration:none}
+        .msg{margin-top:10px;color:#b00020;min-height:18px;text-align:center;font-size:13px}
+        .msg.success{color:#059e63}
+    </style>
+</head>
+<body>
+    <div class="card">
+        <div class="tabs" role="tablist">
+            <button id="tabUser" class="active" aria-pressed="true">Người dùng / Chủ xe điện</button>
+            <button id="tabAdmin" aria-pressed="false">Quản trị viên / CVA</button>
+        </div>
+
+        <div id="formArea">
+            <h2 id="formTitle">Tạo tài khoản Người dùng</h2>
+
+            <form id="registerForm">
+                <input type="hidden" name="role" id="roleInput" value="user">
+                
+                <label>Họ và tên
+                    <input type="text" name="fullName" required placeholder="Nguyễn Văn A">
+                </label>
+                
+                <label>Email
+                    <input type="email" name="email" required placeholder="nguoidung@example.com">
+                </label>
+                
+                <label>Mật khẩu
+                    <input type="password" name="password" required placeholder="●●●●●●●">
+                </label>
+                
+                <label>Xác nhận mật khẩu
+                    <input type="password" name="confirmPassword" required placeholder="●●●●●●●">
+                </label>
+
+                <button type="submit" id="submitBtn" class="submit">Tạo tài khoản Người dùng</button>
+            </form>
+
+            <div id="result" class="msg"></div>
+
+            <div id="loginArea" class="muted">Đã có tài khoản? <a class="sign" href="/login.html">Đăng nhập</a></div>
+        </div>
+    </div>
+
+    <script>
+        const tabUser = document.getElementById('tabUser');
+        const tabAdmin = document.getElementById('tabAdmin');
+        const roleInput = document.getElementById('roleInput');
+        const formTitle = document.getElementById('formTitle');
+        const submitBtn = document.getElementById('submitBtn');
+        const loginArea = document.getElementById('loginArea');
+        const result = document.getElementById('result');
+
+        function showUser(){
+            tabUser.classList.add('active'); tabUser.setAttribute('aria-pressed','true');
+            tabAdmin.classList.remove('active'); tabAdmin.setAttribute('aria-pressed','false');
+            roleInput.value = 'user';
+            formTitle.textContent = 'Tạo tài khoản Người dùng';
+            submitBtn.textContent = 'Tạo tài khoản Người dùng';
+            loginArea.style.display = 'block';
+            result.textContent = '';
+        }
+
+        function showAdmin(){
+            tabAdmin.classList.add('active'); tabAdmin.setAttribute('aria-pressed','true');
+            tabUser.classList.remove('active'); tabUser.setAttribute('aria-pressed','false');
+            roleInput.value = 'admin';
+            formTitle.textContent = 'Tạo tài khoản Quản trị viên';
+            submitBtn.textContent = 'Tạo tài khoản Quản trị viên';
+            loginArea.style.display = 'none';
+            result.textContent = '';
+        }
+
+        tabUser.addEventListener('click', showUser);
+        tabAdmin.addEventListener('click', showAdmin);
+
+        const form = document.getElementById('registerForm');
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            result.textContent = '';
+            const data = Object.fromEntries(new FormData(form).entries());
+
+            if (data.password !== data.confirmPassword) {
+                result.textContent = 'Mật khẩu không khớp';
+                return;
+            }
+
+            if (data.password.length < 6) {
+                result.textContent = 'Mật khẩu phải có ít nhất 6 ký tự';
+                return;
+            }
+
+            try {
+                const endpoint = data.role === 'admin' ? '/api/admin/register' : '/api/users/register';
+                const res = await fetch(endpoint, {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({
+                        email: data.email,
+                        password: data.password,
+                        fullName: data.fullName
+                    })
+                });
+                const json = await res.json().catch(() => null);
+                if (res.ok) {
+                    result.textContent = 'Tạo tài khoản thành công! Đang chuyển hướng...';
+                    result.classList.add('success');
+                    setTimeout(() => {
+                        window.location.href = '/login.html';
+                    }, 1500);
+                } else {
+                    result.textContent = json && json.message ? json.message : 'Đăng ký thất bại';
+                }
+            } catch (err) {
+                result.textContent = 'Lỗi: ' + err.message;
+            }
+        });
+
+        tabUser.addEventListener('keydown', (e)=>{ if(e.key==='Enter') showUser(); });
+        tabAdmin.addEventListener('keydown', (e)=>{ if(e.key==='Enter') showAdmin(); });
+    </script>
+</body>
+</html>
