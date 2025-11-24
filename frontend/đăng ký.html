@@ -60,7 +60,7 @@ background-size:cover;
 
             <div id="result" class="msg"></div>
 
-            <div id="loginArea" class="muted">Đã có tài khoản? <a class="sign" href="/login.html">Đăng nhập</a></div>
+            <div id="loginArea" class="muted">Đã có tài khoản? <a class="sign" href="/đăng nhập.html">Đăng nhập</a></div>
         </div>
     </div>
 
@@ -128,7 +128,7 @@ background-size:cover;
                     result.textContent = 'Tạo tài khoản thành công! Đang chuyển hướng...';
                     result.classList.add('success');
                     setTimeout(() => {
-                        window.location.href = '/login.html';
+                        window.location.href = '/đăng nhập.html';
                     }, 1500);
                 } else {
                     result.textContent = json && json.message ? json.message : 'Đăng ký thất bại';
