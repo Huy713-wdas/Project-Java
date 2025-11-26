@@ -45,7 +45,7 @@ public class AdminController {
         service.removeListing(id);
     }
 
-    // Transactions
+    // GIAO DỊCH
     @GetMapping("/transactions")
     public List<CarbonTransaction> getTransactions() {
         return service.getTransactions();
@@ -56,7 +56,7 @@ public class AdminController {
         return service.markDisputed(id);
     }
 
-    // Report
+    // BÁO CÁO NỀN TẢNG
     @GetMapping("/reports/platform")
     public Map<String, Object> report() {
         return service.platformReport();

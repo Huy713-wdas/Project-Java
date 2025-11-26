@@ -15,14 +15,14 @@ import java.util.List;
 public class TransactionController {
 
     private final TransactionService txService;
-
+// TÌM KIẾM TÍN CHỈ THEO KHU VỰC
     @GetMapping("/credits")
     public List<CarbonCredit> search(
             @RequestParam(required = false) String region,
             @RequestParam(required = false) Double maxPrice) {
         return txService.searchCredits(region, maxPrice);
     }
-
+// MUA TÍN CHỈ
     @PostMapping("/buy")
     public CarbonTransaction buy(
             @RequestParam Long buyerId,//ID NGƯỜI MUA
@@ -31,7 +31,7 @@ public class TransactionController {
             @RequestParam(defaultValue = "BANKING") String paymentMethod) {
         return txService.buy(buyerId, creditId, quantity, paymentMethod);
     }
-
+// LỊCH SỬ GIAO DỊCH
     @GetMapping("/history")
     public List<CarbonTransaction> history(@RequestParam Long buyerId) {
         return txService.history(buyerId);//LỊCH SỦ GIAO DỊCH

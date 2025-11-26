@@ -17,18 +17,19 @@ import java.util.List;
 @Service
 public class JourneyService {
 private final JourneyRepository repo;
-// baseline grams CO2 per km (configurable)
-private final double baselineGperKm = 200.0; // 200 gCO2/km default
 
+// 200 GRAM CO2 TRÊN 1 KM 
+private final double baselineGperKm = 200.0; 
 
+// KHỞI TẠO
 public JourneyService(JourneyRepository repo) { this.repo = repo; }
 
-
+// PHÂN TÍCH VÀ LƯU HÀNH TRÌNH TỪ FILE CSV
 public List<Journey> parseAndSaveCsv(MultipartFile file, String ownerId) {
 List<Journey> out = new ArrayList<>();
 try (BufferedReader br = new BufferedReader(new InputStreamReader(file.getInputStream()))) {
 String line;
-// example CSV: timestamp,distance_km
+// 
 br.readLine(); // skip header if exists
 while ((line = br.readLine()) != null) {
 String[] cols = line.split(",");
@@ -50,7 +51,7 @@ throw new RuntimeException("CSV parse error: " + e.getMessage());
 return out;
 }
 
-
+// HÀNH TRÌNH THEO CHỦ SỞ HỨU
 public List<Journey> findByOwner(String ownerId) {
 return repo.findByOwnerId(ownerId);
 }

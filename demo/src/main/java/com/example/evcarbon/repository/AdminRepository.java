@@ -1,4 +1,5 @@
 package com.example.evcarbon.repository;
+//LƯU TRỮ DỮ LIỆU ADMIN
 
 import com.example.evcarbon.model.AdminUser;
 import com.example.evcarbon.model.CarbonTransaction;

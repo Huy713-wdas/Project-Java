@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class CarbonCalculatorService {
-private static final double CO2_PER_KM = 0.192; // kg CO2 per km for ICE baseline
+private static final double CO2_PER_KM = 0.192; //TRƯNG BÌNH 192 GRAM CO2 TRÊN 1 KM
 
 
 public double calcCO2kgFromKm(double km) {

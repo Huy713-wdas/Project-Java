@@ -70,17 +70,17 @@ public class VerificationService {
 
         return req;
     }
-
+// LẤY DANH SÁCH YÊU CẦU CHỜ DUYỆT
     public List<VerificationRequest> getPending() {
         return requests.stream()
                 .filter(r -> r.getStatus().equals("PENDING"))
                 .toList();
     }
-
+// LẤY DANH SÁCH BÁO CÁO
     public List<AuditReport> getReports() {
         return reports;
     }
-
+// TÌM THEO ID
     private VerificationRequest findRequest(Long id) {
         return requests.stream()
                 .filter(r -> r.getId().equals(id))

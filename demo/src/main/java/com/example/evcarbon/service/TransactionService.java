@@ -13,23 +13,23 @@ import java.util.*;
 @Service
 
 public class TransactionService {
-
+// MỔ PHỎNG KHO DỮ LIỆU VÀ GIAO DỊCH
     private final List<CarbonTransaction> transactions = new ArrayList<>();
     private final List<CarbonCredit> credits = new ArrayList<>();
     private Long idCounter = 1L;
-
+// KHỞI TẠO
     public TransactionService() {
         credits.add(new CarbonCredit(1L, "Credit A", 50.0, 100, "Hà Nội"));
         credits.add(new CarbonCredit(2L, "Credit B", 70.0, 60, "HCM"));
     }
-
+// TÌM KIẾM TÍN CHỈ THEO KHU VỰC VÀ GIÁ TỐI ĐA
     public List<CarbonCredit> searchCredits(String region, Double maxPrice) {
         return credits.stream()
                 .filter(c -> (region == null || c.getRegion().equalsIgnoreCase(region)) &&
                              (maxPrice == null || c.getPrice() <= maxPrice))
                 .toList();
     }
-
+// MUA TÍN CHỈ
     public CarbonTransaction buy(Long buyerId, Long creditId, int quantity, String paymentMethod) {
         CarbonCredit credit = credits.stream()
                 .filter(c -> c.getId().equals(creditId))
@@ -66,7 +66,7 @@ public class TransactionService {
 
         return tx;
     }
-
+// LỊCH SỬ GIAO DỊCH THEO NGƯỜI MUA
     public List<CarbonTransaction> history(Long buyerId) {
         return transactions.stream()
                 .filter(t -> t.getBuyerId().equals(buyerId))
