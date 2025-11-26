@@ -15,4 +15,13 @@ public class CarbonCredit {
     private int quantity;//SỐ LƯỢNG TÍN CHỈ
     private String region;//VÙNG
     private Long sellerId;//ID NGƯỜI BÁN
+
+    //CONTRUCTOR 5 THAM SỐ
+    public CarbonCredit(Long id, String name, double price, int quantity, String region) {
+        this.id = id;
+        this.name = name;
+        this.price = price;
+        this.quantity = quantity;
+        this.region = region;
+    }
 }

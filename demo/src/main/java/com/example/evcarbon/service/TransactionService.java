@@ -1,17 +1,20 @@
 package com.example.evcarbon.service;
-//QUẢN LÝ GIAO DỊCH TÍN CHỈ CARBON
 
 import com.example.evcarbon.model.CarbonCredit;
-import com.example.evcarbon.model.Transaction;
+import com.example.evcarbon.model.CarbonTransaction;
+
+import lombok.RequiredArgsConstructor;
+
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.*;
 
 @Service
+
 public class TransactionService {
 
-    private final List<Transaction> transactions = new ArrayList<>();
+    private final List<CarbonTransaction> transactions = new ArrayList<>();
     private final List<CarbonCredit> credits = new ArrayList<>();
     private Long idCounter = 1L;
 
@@ -27,9 +30,9 @@ public class TransactionService {
                 .toList();
     }
 
-    public Transaction buy(Long buyerId, Long creditId, int quantity, String paymentMethod) {
+    public CarbonTransaction buy(Long buyerId, Long creditId, int quantity, String paymentMethod) {
         CarbonCredit credit = credits.stream()
-                .filter(c -> c.getId() == creditId)
+                .filter(c -> c.getId().equals(creditId))
                 .findFirst()
                 .orElseThrow(() -> new RuntimeException("Credit not found"));
 
@@ -43,25 +46,28 @@ public class TransactionService {
         credit.setQuantity(credit.getQuantity() - quantity);
 
         // tạo giao dịch
-        Transaction tx = new Transaction(
-                idCounter++,
-                buyerId,
-                999L,          // seller demo
-                creditId,
-                quantity,
-                credit.getPrice(),
-                total,
-                paymentMethod,
-                "SUCCESS",
-                "https://certificates.example/" + UUID.randomUUID(),
-                LocalDateTime.now()
-        );
+       CarbonTransaction tx = CarbonTransaction.builder()
+        .buyerId(buyerId)
+        .sellerId(999L)
+        .creditId(creditId)
+        .quantity(quantity)
+        .unitPrice(credit.getPrice())
+        .totalPrice(total)
+        .paymentMethod(paymentMethod)
+        .status("SUCCESS")
+        .certificateUrl("https://certificates.example/" + UUID.randomUUID())
+        .createdAt(LocalDateTime.now())
+        .build();
 
+        ;
+
+        // lưu vào danh sách
         transactions.add(tx);
+
         return tx;
     }
 
-    public List<Transaction> history(Long buyerId) {
+    public List<CarbonTransaction> history(Long buyerId) {
         return transactions.stream()
                 .filter(t -> t.getBuyerId().equals(buyerId))
                 .toList();

@@ -2,7 +2,7 @@ package com.example.evcarbon.controller;
 //KIỂM SOÁT GIAO DỊCH TÍN CHỈ
 
 import com.example.evcarbon.model.CarbonCredit;
-import com.example.evcarbon.model.Transaction;
+import com.example.evcarbon.model.CarbonTransaction;
 import com.example.evcarbon.service.TransactionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -24,7 +24,7 @@ public class TransactionController {
     }
 
     @PostMapping("/buy")
-    public Transaction buy(
+    public CarbonTransaction buy(
             @RequestParam Long buyerId,//ID NGƯỜI MUA
             @RequestParam Long creditId,//ID NGƯỜI BÁN
             @RequestParam int quantity,//SỐ LƯỢNG TÍN CHỈ
@@ -33,7 +33,7 @@ public class TransactionController {
     }
 
     @GetMapping("/history")
-    public List<Transaction> history(@RequestParam Long buyerId) {
+    public List<CarbonTransaction> history(@RequestParam Long buyerId) {
         return txService.history(buyerId);//LỊCH SỦ GIAO DỊCH
     }
 }

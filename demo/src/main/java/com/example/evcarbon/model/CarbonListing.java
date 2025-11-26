@@ -20,7 +20,7 @@ private Long id;//id của listing
 private Long ownerId;//id của chủ sở hữu
 private double credits;//số tín chỉ carbon được liệt kê
 private Double price; // fixed price per credit (if auction=false)
-private boolean auction;//ĐAUS GIÁ HOẶC KHÔNG
+private boolean auction;//ĐẤU GIÁ HOẶC KHÔNG
 private LocalDateTime createdAt;//THỜI GIẠN TẠO
 private boolean active;//hoạt động 
 }

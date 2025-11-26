@@ -15,9 +15,9 @@ public class Journey {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String ownerId; // user id or wallet id
-    private double distanceKm;
-    private double savedKgCO2; // saved CO2 in kg
-    private double credits; // credits (tons)
-    private LocalDateTime timestamp;
+    private String ownerId; // ID CHỦ SỠ HỮU
+    private double distanceKm;// QUÃNG ĐƯỜNG DI CHUYỂN
+    private double savedKgCO2; // GIẢM THIỂU CO2 (KG)
+    private double credits; // CREDIT (TÍN CHỈ)
+    private LocalDateTime timestamp;// THỜI GIAN
 }

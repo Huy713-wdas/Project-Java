@@ -1,7 +1,7 @@
 package com.example.evcarbon.controller;
 
 import com.example.evcarbon.model.AdminUser;
-import com.example.evcarbon.model.Transaction;
+import com.example.evcarbon.model.CarbonTransaction;
 import com.example.evcarbon.model.CarbonCredit;
 import com.example.evcarbon.service.AdminService;
 import lombok.RequiredArgsConstructor;
@@ -47,12 +47,12 @@ public class AdminController {
 
     // Transactions
     @GetMapping("/transactions")
-    public List<Transaction> getTransactions() {
+    public List<CarbonTransaction> getTransactions() {
         return service.getTransactions();
     }
 
     @PostMapping("/transactions/{id}/dispute")
-    public Transaction dispute(@PathVariable Long id) {
+    public CarbonTransaction dispute(@PathVariable Long id) {
         return service.markDisputed(id);
     }
 

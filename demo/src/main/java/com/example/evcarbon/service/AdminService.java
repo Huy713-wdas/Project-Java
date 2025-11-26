@@ -45,12 +45,12 @@ public class AdminService {
     }
 
     // --- Transactions ---
-    public List<Transaction> getTransactions() {
+    public List<CarbonTransaction> getTransactions() {
         return repo.transactions;
     }
 
-    public Transaction markDisputed(Long txId) {
-        Transaction tx = repo.transactions.stream()
+    public CarbonTransaction markDisputed(Long txId) {
+        CarbonTransaction tx = repo.transactions.stream()
                 .filter(t -> t.getId().equals(txId))
                 .findFirst()
                 .orElseThrow(() -> new RuntimeException("Transaction not found"));
@@ -62,7 +62,7 @@ public class AdminService {
     // --- Reporting ---
     public Map<String, Object> platformReport() {
         double totalValue = repo.transactions.stream()
-                .mapToDouble(Transaction::getTotalAmount)
+                .mapToDouble(CarbonTransaction::getTotalPrice)
                 .sum();
 
         int count = repo.transactions.size();
