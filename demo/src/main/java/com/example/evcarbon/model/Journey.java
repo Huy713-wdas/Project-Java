@@ -1,4 +1,5 @@
 package com.example.evcarbon.model;
+//HÀNH TRÌNH VÀ GIẢM THẢI CO2
 
 import lombok.Getter;
 import lombok.Setter;

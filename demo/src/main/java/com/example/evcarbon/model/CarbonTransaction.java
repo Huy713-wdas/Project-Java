@@ -1,5 +1,5 @@
 package com.example.evcarbon.model;
-
+//GIAO DỊCH CARBON
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -16,12 +16,12 @@ import java.time.LocalDateTime;
 public class CarbonTransaction {
 @Id
 @GeneratedValue(strategy = GenerationType.IDENTITY)
-private Long id;
-private Long buyerId;
-private Long sellerId;
-private Long listingId;
-private double credits;
-private double totalPrice;
+private Long id;//ID GIAO DỊCH
+private Long buyerId;//ID NGƯỜI MUA
+private Long sellerId;//ID NGƯỜI BÁN
+private Long listingId;//ID DÁNH SÁCH
+private double credits;//SỐ LƯỢNG TÍN CHỈ
+private double totalPrice;//TỔNG GIÁ TIỀN
 private String status; // PENDING, CANCELED, COMPLETED
-private LocalDateTime createdAt;
+private LocalDateTime createdAt;//THỜI GIAN TẠO
 }

@@ -1,5 +1,5 @@
 package com.example.evcarbon.service;
-
+//TÍNH TOÁN TÍN CHỈ CARBON
 
 import org.springframework.stereotype.Service;
 
@@ -10,7 +10,7 @@ private static final double CO2_PER_KM = 0.192; // kg CO2 per km for ICE baselin
 
 
 public double calcCO2kgFromKm(double km) {
-return km * CO2_PER_KM;
+return km * CO2_PER_KM;//
 }
 
 

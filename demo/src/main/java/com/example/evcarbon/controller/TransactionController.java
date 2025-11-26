@@ -1,4 +1,5 @@
 package com.example.evcarbon.controller;
+//KIỂM SOÁT GIAO DỊCH TÍN CHỈ
 
 import com.example.evcarbon.model.CarbonCredit;
 import com.example.evcarbon.model.Transaction;
@@ -24,15 +25,15 @@ public class TransactionController {
 
     @PostMapping("/buy")
     public Transaction buy(
-            @RequestParam Long buyerId,
-            @RequestParam Long creditId,
-            @RequestParam int quantity,
+            @RequestParam Long buyerId,//ID NGƯỜI MUA
+            @RequestParam Long creditId,//ID NGƯỜI BÁN
+            @RequestParam int quantity,//SỐ LƯỢNG TÍN CHỈ
             @RequestParam(defaultValue = "BANKING") String paymentMethod) {
         return txService.buy(buyerId, creditId, quantity, paymentMethod);
     }
 
     @GetMapping("/history")
     public List<Transaction> history(@RequestParam Long buyerId) {
-        return txService.history(buyerId);
+        return txService.history(buyerId);//LỊCH SỦ GIAO DỊCH
     }
 }

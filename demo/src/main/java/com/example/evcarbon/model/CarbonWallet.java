@@ -1,12 +1,12 @@
 package com.example.evcarbon.model;
-
+//VÍ TÍN CHỈ CARBON
 
 import jakarta.persistence.*;
 import lombok.*;
 
 
 @Entity
-@Table(name = "carbon_wallet")
+@Table(name = "carbon_wallet")//VÍ TÍN CHỈ CARBON
 @Getter
 @Setter
 @NoArgsConstructor

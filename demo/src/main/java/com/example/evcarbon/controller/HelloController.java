@@ -1,4 +1,5 @@
 package com.example.evcarbon.controller;
+//GỌI LOCALHOST 3000 TỚI 8080
 
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;

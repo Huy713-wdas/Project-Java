@@ -1,5 +1,5 @@
 package com.example.evcarbon.repository;
-
+//LƯU TRỮ GIAO DỊCH CARBON
 
 import com.example.evcarbon.model.CarbonTransaction;
 import org.springframework.data.jpa.repository.JpaRepository;
